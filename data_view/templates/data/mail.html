@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <div class="container">
+
+          <form action="http://127.0.0.1:8000/data_view/sendMail/" method="POST">
+            {% csrf_token %}
+
+            <label for='eml'>Votre email:</label>
+            <div class="for-group">
+                <input type="email" class="form-control col-lg-12 col-md-12" name="emailfrom" id="eml"placeholder="exemple@exemple.com">
+            </div>
+            <label for='dist'>Destination:</label>
+            <div class="for-group">
+                <input type="email" class="form-control" name="emailto" id="dist" placeholder="exemple@exemple.com">
+            </div>
+            <label for='obj'>Objet:</label>
+            <div class="for-group">
+                <input type="text" class="form-control" name="objet" id="obj"placeholder="Objet">
+            </div>
+            <label for='msg'>Votre message:</label>
+            <div class="for-group">
+                <textarea name="msg" id="msg" cols="100" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+            <button class="btn btn-success">Envoyer</button>
+            </div>
+          </form>
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+{% endblock %}

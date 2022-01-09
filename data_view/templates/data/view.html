@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+    Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <a href="emails/"><button class="btn btn-warning">send email</button></a>
+    <div class="container">
+        <div class="row">
+            <p>nombre de bien:</p>
+            <h6>
+            {{ bien }}
+            </h6>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>                     
+                     <th scope="col">Ville</th>
+                     <th scope="col">ecartType de prix</th>              
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for s in std %}
+                        <tr>
+                            <td>{{ s.ville }}</td>
+                            <td>{{ s.prix_m2_ttc }}</td>
+                        </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+              <table class="table table-striped table-dark">
+                <thead>
+                  <tr>                     
+                     <th scope="col">Ville</th>
+                     <th scope="col">Moyenne de prix</th>              
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for m in mean %}
+                        <tr>
+                            <td>{{ m.ville }}</td>
+                            <td>{{ m.prix_m2_ttc }}</td>
+                        </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>                     
+                     <th scope="col">id_lot</th>
+                     <th scope="col">nb_piece</th>
+                     <th scope="col">typologie</th>
+                     <th scope="col">prix_tva_reduite</th>
+                     <th scope="col">prix_tva_normale</th>
+                     <th scope="col">prix_HT</th>
+                     <th scope="col">prix_m2_HT</th>
+                     <th scope="col">prix_m2_TTC</th>
+                     <th scope="col">surface</th>
+                     <th scope="col">etage</th>
+                     <th scope="col">orientation</th>
+                     <th scope="col">exterieur</th>
+                     <th scope="col">balcony</th>
+                     <th scope="col">garden</th>
+                     <th scope="col">parking</th>
+                     <th scope="col">nom_programme</th>
+                     <th scope="col">ville</th>
+                     <th scope="col">departement</th>
+                     <th scope="col">date_fin_programme</th>
+                     <th scope="col">adresse_entiere</th>
+                     <th scope="col">promoteur</th>
+                     <th scope="col">date_extraction</th>                     
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for i in df %}
+                        <tr>
+                            <td>{{ i.id_lot }}</td>
+                            <td>{{ i.nb_piece }}</td>
+                            <td>{{ i.typologie }}</td>
+                            <td>{{ i.prix_tva_reduite }}</td>
+                            <td>{{ i.prix_tva_normale }}</td>
+                            <td>{{ i.prix_ht }}</td>
+                            <td>{{ i.prix_m2_ht }}</td>
+                            <td>{{ i.prix_m2_ttc }}</td>
+                            <td>{{ i.surface }}</td>
+                            <td>{{ i.etage }}</td>
+                            <td>{{ i.orientation }}</td>
+                            <td>{{ i.exterieur }}</td>
+                            <td>{{ i.balcony }}</td>
+                            <td>{{ i.garden }}</td>
+                            <td>{{ i.parking }}</td>
+                            <td>{{ i.nom_programme }}</td>
+                            <td>{{ i.ville }}</td>
+                            <td>{{ i.departement }}</td>
+                            <td>{{ i.date_fin_programme }}</td>
+                            <td>{{ i.adresse_entiere }}</td>
+                            <td>{{ i.promoteur }}</td>
+                            <td>{{ i.date_extraction }}</td>
+                        </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+
+            {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
+        {% endblock %}
